@@ -12,6 +12,7 @@ object Versions {
     const val kotlin = "1.6.20"
     const val detekt = "1.20.0"
     const val ktlint = "10.2.1"
+    const val kotlinxKnit = "0.4.0"
 }
 
 dependencies {
@@ -21,6 +22,7 @@ dependencies {
 
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}")
     implementation("org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlint}")
+    implementation("org.jetbrains.kotlinx:kotlinx-knit:${Versions.kotlinxKnit}")
 }
 
 tasks.withType<KotlinCompile>().configureEach {

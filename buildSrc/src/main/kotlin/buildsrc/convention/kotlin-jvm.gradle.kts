@@ -13,6 +13,16 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
 }
 
+dependencies {
+    implementation(platform("org.jetbrains.kotlinx:kotlinx-serialization-bom:1.3.2"))
+
+    testImplementation(platform("io.kotest:kotest-bom:5.2.3"))
+    testImplementation("io.kotest:kotest-runner-junit5")
+    testImplementation("io.kotest:kotest-assertions-core")
+    testImplementation("io.kotest:kotest-property")
+    testImplementation("io.kotest:kotest-framework-datatest")
+}
+
 kotlin {
     jvmToolchain {
         (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(11))

@@ -13,8 +13,8 @@ dependencies {
     implementation("com.charleskorn.kaml:kaml:0.43.0")
     implementation("com.squareup:kotlinpoet:1.11.0")
 
-    testImplementation("io.kotest:kotest-assertions-core:5.2.3")
-    testImplementation("io.kotest:kotest-runner-junit5:5.2.3")
+    testImplementation("io.kotest:kotest-assertions-core")
+    testImplementation("io.kotest:kotest-runner-junit5")
 }
 
 application {

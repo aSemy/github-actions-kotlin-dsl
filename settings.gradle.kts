@@ -6,6 +6,7 @@ include(
     ":library",
     ":wrapper-generator",
     ":script-generator",
+    ":docs:code",
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
