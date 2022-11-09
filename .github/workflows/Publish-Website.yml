@@ -31,8 +31,8 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Prep mkdocs
-        run: .github/workflows/prepare_mkdocs.sh
+      #- name: Prep mkdocs
+#        run: .github/workflows/prepare_mkdocs.sh
 
       - name: Build mkdocs
         run: |
