@@ -12,6 +12,10 @@ concurrency:
 jobs:
  release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
     - id: step-0
       uses: actions/checkout@v3
