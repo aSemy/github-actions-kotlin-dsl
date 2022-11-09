@@ -10,36 +10,41 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
- release:
+  deploy-website:
     runs-on: ubuntu-latest
-    
     permissions:
       contents: read
       pages: write
       id-token: write
-            
+      
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}  
+
     steps:
-    - id: step-0
-      uses: actions/checkout@v3
-    - id: step-3
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.8
-    - id: step-4
-      run: pip install -r docs/requirements.txt
-    - id: step-7
-      name: Deploy docs
-      run: mkdocs gh-deploy --force
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+      - uses: actions/configure-pages@v2  
 
-    - uses: actions/upload-pages-artifact@v1
-      if: success()
-      with:
-        path: site
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
 
-    - name: Deploy to GitHub Pages
-      if: success()
-      id: deployment
-      uses: actions/deploy-pages@main
+      - name: Prep mkdocs
+        run: .github/workflows/prepare_mkdocs.sh
+
+      - name: Build mkdocs
+        run: |
+          pip3 install -r docs/requirements.txt
+          mkdocs build
+      
+      - uses: actions/upload-pages-artifact@v1
+        if: success()
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        if: success()
+        id: deployment
+        uses: actions/deploy-pages@main
