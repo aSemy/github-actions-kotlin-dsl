@@ -10,18 +10,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy-website:
+ release:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-      
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}  
-
-    steps:    
+    steps:
+    - id: step-0
+      uses: actions/checkout@v3
+    - id: step-2
+      name: Build
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: build
+    - id: step-3
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+    - id: step-4
+      run: pip install -r docs/requirements.txt
     - id: step-7
       name: Deploy docs
       run: mkdocs gh-deploy --force
