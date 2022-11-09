@@ -12,6 +12,7 @@ concurrency:
 jobs:
  release:
     runs-on: ubuntu-latest
+    
     permissions:
       contents: read
       pages: write
