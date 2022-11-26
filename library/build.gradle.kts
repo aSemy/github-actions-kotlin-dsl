@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jmailen.gradle.kotlinter.tasks.ConfigurableKtLintTask
 
 plugins {
     buildsrc.convention.`kotlin-jvm`
@@ -12,7 +13,7 @@ plugins {
 }
 
 group = "it.krzeminski"
-version = "0.30.0"
+version = "0.32.0"
 
 dependencies {
     implementation("org.snakeyaml:snakeyaml-engine:2.5")
@@ -46,10 +47,15 @@ apiValidation {
     ignoredPackages.add("it.krzeminski.githubactions.actions")
 }
 
-ktlint {
-    filter {
-        exclude { it.file.invariantSeparatorsPath.contains("/gen/") }
-    }
+fun ConfigurableKtLintTask.kotlinterConfig() {
+    exclude { it.file.invariantSeparatorsPath.contains("/gen/") }
+}
+
+tasks.lintKotlinMain {
+    kotlinterConfig()
+}
+tasks.formatKotlinMain {
+    kotlinterConfig()
 }
 
 val validateDuplicatedVersion by tasks.creating<Task> {
